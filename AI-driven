@@ -1,1 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI-Driven UX Personalization</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#07111f;
+    --bg2:#101d34;
+    --glass:rgba(255,255,255,.08);
+    --border:rgba(255,255,255,.15);
+    --text:#ffffff;
+    --sub:#cfd8e3;
+    --accent:#53d8ff;
+    --accent2:#8b5cf6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(135deg,var(--bg),var(--bg2));
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+/* Animated Background */
+
+.blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(90px);
+    z-index:-1;
+    animation:float 10s ease-in-out infinite alternate;
+}
+
+.b1{
+    width:350px;
+    height:350px;
+    background:#00d9ff55;
+    top:-80px;
+    left:-100px;
+}
+
+.b2{
+    width:300px;
+    height:300px;
+    background:#8b5cf655;
+    bottom:-80px;
+    right:-80px;
+    animation-duration:13s;
+}
+
+.b3{
+    width:220px;
+    height:220px;
+    background:#00ff9955;
+    top:50%;
+    left:45%;
+    animation-duration:16s;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0) translateX(0) scale(1);
+    }
+    to{
+        transform:translateY(-40px) translateX(30px) scale(1.15);
+    }
+}
+
+/* Navbar */
+
+nav{
+    position:sticky;
+    top:0;
+    backdrop-filter:blur(20px);
+    background:rgba(0,0,0,.25);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:100;
+}
+
+nav .wrap{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:var(--accent);
+}
+
+nav ul{
+    display:flex;
+    gap:18px;
+    list-style:none;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--accent);
+}
+
+/* Hero */
+
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.hero-content{
+    max-width:900px;
+    animation:fadeUp 1s;
+}
+
+.hero h1{
+    font-size:60px;
+    line-height:1.15;
+    margin-bottom:20px;
+    background:linear-gradient(90deg,#53d8ff,#8b5cf6,#00ffa6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:var(--sub);
+    font-size:18px;
+    line-height:1.8;
+}
+
+.btns{
+    margin-top:35px;
+}
+
+.btn{
+    display:inline-block;
+    margin:8px;
+    padding:14px 30px;
+    border-radius:50px;
+    text-decoration:none;
+    color:white;
+    transition:.4s;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08);
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 30px rgba(83,216,255,.25);
+}
+
+/* Sections */
+
+section{
+    padding:80px 20px;
+}
+
+.title{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:50px;
+}
+
+.grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    backdrop-filter:blur(18px);
+    border-radius:22px;
+    padding:28px;
+    transition:.4s;
+    opacity:0;
+    transform:translateY(40px);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 20px 35px rgba(0,0,0,.25);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:var(--accent);
+}
+
+.card ul{
+    padding-left:18px;
+}
+
+.card li{
+    margin:8px 0;
+    color:var(--sub);
+}
+
+.card p{
+    color:var(--sub);
+    line-height:1.8;
+}
+
+/* Timeline */
+
+.timeline{
+    max-width:1100px;
+    margin:auto;
+}
+
+.step{
+    background:var(--glass);
+    margin:18px 0;
+    padding:20px;
+    border-left:5px solid var(--accent);
+    border-radius:15px;
+    transition:.4s;
+}
+
+.step:hover{
+    transform:translateX(8px);
+}
+
+/* Progress */
+
+.bar{
+    margin-top:20px;
+}
+
+.label{
+    margin-bottom:6px;
+}
+
+.progress{
+    height:10px;
+    background:#23324b;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#53d8ff,#8b5cf6);
+    animation:load 2s forwards;
+}
+
+.fill.one{width:95%;}
+.fill.two{width:88%;}
+.fill.three{width:90%;}
+.fill.four{width:85%;}
+
+@keyframes load{
+    from{width:0;}
+}
+
+/* Footer */
+
+footer{
+    text-align:center;
+    padding:35px;
+    color:#b7c5d9;
+}
+
+/* Animations */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:40px;
+}
+
+.title{
+    font-size:30px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<nav>
+<div class="wrap">
+<div class="logo">AI UX</div>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#workflow">Workflow</a></li>
+<li><a href="#future">Future</a></li>
+</ul>
+
+</div>
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>AI-Driven UX Personalization</h1>
+
+<p>
+Artificial Intelligence transforms digital experiences by learning user
+behavior and automatically delivering customized interfaces, content,
+recommendations, and interactions for every individual.
+</p>
+
+<div class="btns">
+<a href="#about" class="btn">Explore</a>
+<a href="#future" class="btn">Future Scope</a>
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="title">What is AI-Driven UX Personalization?</h2>
+
+<div class="grid">
+
+<div class="card reveal">
+<h3>📖 Definition</h3>
+<p>
+AI-powered personalization adapts websites and applications based on user
+preferences, browsing patterns, and interaction history to create smarter
+digital experiences.
+</p>
+</div>
+
+<div class="card reveal">
+<h3>🎯 Goal</h3>
+<p>
+Deliver the right content to the right user at the right time while improving
+engagement, satisfaction, and usability.
+</p>
+</div>
+
+<div class="card reveal">
+<h3>💡 Technologies</h3>
+<ul>
+<li>Machine Learning</li>
+<li>Deep Learning</li>
+<li>Natural Language Processing</li>
+<li>Recommendation Systems</li>
+<li>Predictive Analytics</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<section id="features">
+
+<h2 class="title">Key Features</h2>
+
+<div class="grid">
+
+<div class="card reveal">
+<h3>🤖 Smart Recommendations</h3>
+<p>Suggests products, videos, or articles based on user interests.</p>
+</div>
+
+<div class="card reveal">
+<h3>🔍 Intelligent Search</h3>
+<p>Predicts queries and improves search accuracy using AI.</p>
+</div>
+
+<div class="card reveal">
+<h3>📊 Behavior Analysis</h3>
+<p>Analyzes clicks, scrolling, and usage patterns for personalization.</p>
+</div>
+
+<div class="card reveal">
+<h3>🎨 Adaptive Interface</h3>
+<p>Changes layouts and themes according to user preferences.</p>
+</div>
+
+<div class="card reveal">
+<h3>💬 AI Assistants</h3>
+<p>Provides instant support through conversational chatbots.</p>
+</div>
+
+<div class="card reveal">
+<h3>⚡ Real-Time Updates</h3>
+<p>Continuously improves recommendations using live interactions.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="workflow">
+
+<h2 class="title">AI Personalization Workflow</h2>
+
+<div class="timeline">
+
+<div class="step">
+<h3>1️⃣ Data Collection</h3>
+<p>Gather browsing history, preferences, clicks, and interactions.</p>
+</div>
+
+<div class="step">
+<h3>2️⃣ AI Processing</h3>
+<p>Machine learning models identify trends and user patterns.</p>
+</div>
+
+<div class="step">
+<h3>3️⃣ Prediction</h3>
+<p>The system predicts future interests and likely actions.</p>
+</div>
+
+<div class="step">
+<h3>4️⃣ Personalization</h3>
+<p>Dynamic content and interfaces are generated for each user.</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">Performance Impact</h2>
+
+<div style="max-width:900px;margin:auto;">
+
+<div class="bar">
+<div class="label">User Satisfaction</div>
+<div class="progress">
+<div class="fill one"></div>
+</div>
+</div>
+
+<div class="bar">
+<div class="label">Customer Engagement</div>
+<div class="progress">
+<div class="fill two"></div>
+</div>
+</div>
+
+<div class="bar">
+<div class="label">Conversion Rate</div>
+<div class="progress">
+<div class="fill three"></div>
+</div>
+</div>
+
+<div class="bar">
+<div class="label">Retention</div>
+<div class="progress">
+<div class="fill four"></div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="future">
+
+<h2 class="title">Future Scope</h2>
+
+<div class="grid">
+
+<div class="card reveal">
+<h3>🌐 Hyper Personalization</h3>
+<p>Highly customized digital experiences powered by advanced AI models.</p>
+</div>
+
+<div class="card reveal">
+<h3>😊 Emotion Recognition</h3>
+<p>Interfaces adapting based on facial expressions and emotions.</p>
+</div>
+
+<div class="card reveal">
+<h3>🥽 AR & VR</h3>
+<p>Immersive personalized virtual environments for users.</p>
+</div>
+
+<div class="card reveal">
+<h3>🔒 Privacy-Aware AI</h3>
+<p>Smarter personalization while protecting user data securely.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>AI-Driven UX Personalization</h3>
+
+<p>
+Premium College Project • Glassmorphism • Responsive • Animated • Single File
+</p>
+
+</footer>
+
+<script>
+const cards=document.querySelectorAll(".reveal");
+
+function reveal(){
+cards.forEach(card=>{
+const top=card.getBoundingClientRect().top;
+if(top<window.innerHeight-80){
+card.classList.add("show");
+}
+});
+}
+
+window.addEventListener("scroll",reveal);
+reveal();
+</script>
+
+</body>
+</html>
