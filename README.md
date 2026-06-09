@@ -9,8 +9,5 @@ A responsive web project that showcases how AI personalizes user experiences thr
 - CSS
 - JavaScript
 
-## 🚀 Run
-Open `ai.html` in any web browser.
-
 ## 👨‍💻 Author
-Mini Project
+karthika k k
